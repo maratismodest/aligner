@@ -11,6 +11,9 @@ import SwiftUI
 @main
 struct AlignerWidgetBundle: WidgetBundle {
     var body: some Widget {
-        AlignerWidget()
+        // Live Activities exist only on iPhone and iPad.
+        #if os(iOS)
+        AlignerLiveActivity()
+        #endif
     }
 }

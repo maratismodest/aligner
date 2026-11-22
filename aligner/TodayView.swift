@@ -15,6 +15,14 @@ struct TodayView: View {
             }
             .navigationTitle("Сегодня")
         }
+        .task {
+            let now = Date.now
+            let used = sessions.totalOffTime(on: now, now: now)
+            LiveActivityController.sync(
+                offSince: activeSession?.start,
+                limitReachedAt: now.addingTimeInterval(dailyOffLimit - used)
+            )
+        }
     }
 
     private func content(now: Date) -> some View {
@@ -53,6 +61,7 @@ struct TodayView: View {
                         for index in offsets {
                             if todaySessions[index].end == nil {
                                 ReminderScheduler.cancelOffLimitReminders()
+                                LiveActivityController.stop()
                             }
                             context.delete(todaySessions[index])
                         }
@@ -95,7 +104,12 @@ struct TodayView: View {
     }
 
     private func takeOff(used: TimeInterval) {
-        context.insert(OffSession(start: .now))
+        let now = Date.now
+        context.insert(OffSession(start: now))
+        LiveActivityController.start(
+            offSince: now,
+            limitReachedAt: now.addingTimeInterval(dailyOffLimit - used)
+        )
         Task {
             await ReminderScheduler.scheduleOffLimitReminders(remaining: dailyOffLimit - used)
         }
@@ -104,6 +118,7 @@ struct TodayView: View {
     private func putOn() {
         activeSession?.end = .now
         ReminderScheduler.cancelOffLimitReminders()
+        LiveActivityController.stop()
     }
 }
 
