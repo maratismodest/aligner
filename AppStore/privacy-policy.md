@@ -44,4 +44,4 @@ If this policy changes, the updated version will be published at this address wi
 
 ## Contact
 
-Questions about this policy: <support email>
+Questions about this policy: maratismodest@gmail.com

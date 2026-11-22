@@ -80,7 +80,7 @@ Regenerate: run the Debug build in a simulator with launch arguments `-demoData 
 | Field | Value |
 |---|---|
 | Sign-in required | No |
-| Contact | Marat Faizerakhmanov, <support email>, (your phone) |
+| Contact | Marat Faizerakhmanov, maratismodest@gmail.com, (your phone) |
 | Notes | No account or server. Tap "Take Aligners Out" on the Today tab to start the timer and Live Activity. Set up a treatment plan on the Schedule tab to see tray reminders. |
 
 ## App Privacy
