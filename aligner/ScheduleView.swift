@@ -13,19 +13,19 @@ struct ScheduleView: View {
                     PlanOverview(plan: plan)
                 } else {
                     ContentUnavailableView {
-                        Label("Нет плана лечения", systemImage: "calendar.badge.plus")
+                        Label("No Treatment Plan", systemImage: "calendar.badge.plus")
                     } description: {
-                        Text("Укажите дату начала, количество кап и срок ношения каждой — приложение напомнит о смене.")
+                        Text("Enter the start date, number of trays and how long to wear each one — the app will remind you when to switch.")
                     } actions: {
-                        Button("Настроить план") { isEditing = true }
+                        Button("Set Up Plan") { isEditing = true }
                             .buttonStyle(.borderedProminent)
                     }
                 }
             }
-            .navigationTitle("Расписание")
+            .navigationTitle("Schedule")
             .toolbar {
                 if !plans.isEmpty {
-                    Button("Изменить") { isEditing = true }
+                    Button("Edit") { isEditing = true }
                 }
             }
             .sheet(isPresented: $isEditing) {
@@ -47,7 +47,7 @@ private struct PlanOverview: View {
                 summary(current: current, now: now)
             }
 
-            Section("Капы") {
+            Section("Trays") {
                 ForEach(1...plan.totalTrays, id: \.self) { tray in
                     TrayRow(plan: plan, tray: tray, current: current)
                 }
@@ -59,12 +59,12 @@ private struct PlanOverview: View {
     private func summary(current: Int, now: Date) -> some View {
         if current == 0 {
             Label {
-                Text("Лечение начнётся \(plan.startDate, format: .dateTime.day().month(.wide))")
+                Text("Treatment starts \(plan.startDate, format: .dateTime.day().month(.wide))")
             } icon: {
                 Image(systemName: "hourglass")
             }
         } else if current > plan.totalTrays {
-            Label("Лечение по плану завершено 🎉", systemImage: "checkmark.seal.fill")
+            Label("Treatment plan complete 🎉", systemImage: "checkmark.seal.fill")
                 .foregroundStyle(.green)
         } else {
             let nextChange = plan.firstDay(ofTray: current + 1)
@@ -73,15 +73,15 @@ private struct PlanOverview: View {
             ).day ?? 0
 
             VStack(alignment: .leading, spacing: 12) {
-                Text("Капа \(current) из \(plan.totalTrays)")
+                Text("Tray \(current) of \(plan.totalTrays)")
                     .font(.title2.bold())
                 ProgressView(value: Double(current - 1), total: Double(plan.totalTrays))
                 if current < plan.totalTrays {
-                    Text("Смена на капу \(current + 1): \(nextChange, format: .dateTime.day().month(.wide)) (через \(daysLeft) дн.)")
+                    Text("Switch to tray \(current + 1): \(nextChange, format: .dateTime.day().month(.wide)) (in ^[\(daysLeft) day](inflect: true))")
                 } else {
-                    Text("Последняя капа — до \(nextChange, format: .dateTime.day().month(.wide))")
+                    Text("Last tray — until \(nextChange, format: .dateTime.day().month(.wide))")
                 }
-                Text("Окончание лечения: \(plan.endDate, format: .dateTime.day().month(.wide).year())")
+                Text("Treatment ends: \(plan.endDate, format: .dateTime.day().month(.wide).year())")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
@@ -101,7 +101,7 @@ private struct TrayRow: View {
 
         HStack {
             icon
-            Text("Капа \(tray)")
+            Text("Tray \(tray)")
                 .fontWeight(tray == current ? .semibold : .regular)
             Spacer()
             Text("\(start, format: .dateTime.day().month()) – \(lastDay, format: .dateTime.day().month())")
@@ -147,27 +147,27 @@ struct PlanEditor: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Лечение") {
-                    DatePicker("Начало (капа 1)", selection: $startDate, displayedComponents: .date)
-                    Stepper("Всего кап: \(totalTrays)", value: $totalTrays, in: 1...120)
-                    Stepper("Дней на капу: \(daysPerTray)", value: $daysPerTray, in: 1...30)
+                Section("Treatment") {
+                    DatePicker("Start (tray 1)", selection: $startDate, displayedComponents: .date)
+                    Stepper("Total trays: \(totalTrays)", value: $totalTrays, in: 1...120)
+                    Stepper("Days per tray: \(daysPerTray)", value: $daysPerTray, in: 1...30)
                 }
                 Section {
-                    DatePicker("Время", selection: $reminderTime, displayedComponents: .hourAndMinute)
+                    DatePicker("Time", selection: $reminderTime, displayedComponents: .hourAndMinute)
                 } header: {
-                    Text("Напоминание о смене")
+                    Text("Switch Reminder")
                 } footer: {
-                    Text("Удобнее менять капы вечером — первые, самые чувствительные часы пройдут во сне.")
+                    Text("Switching in the evening is easiest — the first, most sensitive hours pass while you sleep.")
                 }
             }
             .formStyle(.grouped)
-            .navigationTitle(plan == nil ? "Новый план" : "План лечения")
+            .navigationTitle(plan == nil ? "New Plan" : "Treatment Plan")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Отмена") { dismiss() }
+                    Button("Cancel") { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Сохранить") { save() }
+                    Button("Save") { save() }
                 }
             }
         }

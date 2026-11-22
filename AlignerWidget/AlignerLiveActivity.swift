@@ -16,7 +16,7 @@ struct AlignerLiveActivity: Widget {
             let isOverLimit = context.isStale
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Label("Сняты", systemImage: "mouth.fill")
+                    Label("Out", systemImage: "mouth.fill")
                         .foregroundStyle(.orange)
                         .font(.headline)
                 }
@@ -27,7 +27,7 @@ struct AlignerLiveActivity: Widget {
                 DynamicIslandExpandedRegion(.bottom) {
                     VStack(alignment: .leading, spacing: 6) {
                         LimitProgress(state: state, isOverLimit: isOverLimit)
-                        Text(isOverLimit ? "Лимит исчерпан — наденьте элайнеры" : "До конца дневного лимита")
+                        Text(isOverLimit ? "Limit reached — put your aligners in" : "Until the daily limit")
                             .font(.caption)
                             .foregroundStyle(isOverLimit ? .red : .secondary)
                     }
@@ -55,10 +55,10 @@ private struct LockScreenView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Label("Элайнеры сняты", systemImage: "mouth.fill")
+                    Label("Aligners out", systemImage: "mouth.fill")
                         .font(.headline)
                         .foregroundStyle(isOverLimit ? .red : .orange)
-                    Text("с \(state.offSince, format: .dateTime.hour().minute()) · прошло \(Text(state.offSince, style: .timer))")
+                    Text("since \(state.offSince, format: .dateTime.hour().minute()) · \(Text(state.offSince, style: .timer))")
                         .font(.caption)
                         .foregroundStyle(.white.opacity(0.7))
                 }
@@ -66,7 +66,7 @@ private struct LockScreenView: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     RemainingText(state: state, isOverLimit: isOverLimit)
                         .font(.title.bold())
-                    Text(isOverLimit ? "лимит исчерпан" : "осталось")
+                    Text(isOverLimit ? "limit reached" : "left")
                         .font(.caption)
                         .foregroundStyle(isOverLimit ? .red : .white.opacity(0.7))
                 }

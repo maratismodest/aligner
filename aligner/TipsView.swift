@@ -20,11 +20,11 @@ enum TipCategory: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .schedule: "Режим ношения"
-        case .nutrition: "Питание"
-        case .hygiene: "Гигиена"
-        case .care: "Уход за элайнерами"
-        case .comfort: "Дискомфорт"
+        case .schedule: "Wear Schedule"
+        case .nutrition: "Food & Drinks"
+        case .hygiene: "Oral Hygiene"
+        case .care: "Aligner Care"
+        case .comfort: "Discomfort"
         }
     }
 
@@ -41,56 +41,56 @@ enum TipCategory: String, CaseIterable, Identifiable {
     var tips: [Tip] {
         switch self {
         case .schedule: [
-            Tip(title: "22 часа в сутки",
-                text: "Элайнеры работают, только если носить их 20–22 часа в день. Каждый лишний час без них замедляет лечение."),
-            Tip(title: "Меняйте капы по графику",
-                text: "Не переходите на следующую капу раньше срока и не задерживайтесь на текущей без указания ортодонта."),
-            Tip(title: "Не пропускайте визиты",
-                text: "Приходите к ортодонту в назначенные даты, даже если всё идёт хорошо — врач контролирует движение зубов."),
+            Tip(title: "22 hours a day",
+                text: "Aligners only work if you wear them 20–22 hours a day. Every extra hour without them slows down treatment."),
+            Tip(title: "Switch trays on schedule",
+                text: "Don't move to the next tray early or stay on the current one longer unless your orthodontist tells you to."),
+            Tip(title: "Keep your appointments",
+                text: "See your orthodontist on the scheduled dates even if everything is going well — they track how your teeth are moving."),
         ]
         case .nutrition: [
-            Tip(title: "Снимайте элайнеры перед едой",
-                text: "Ешьте и пейте всё, кроме чистой воды, только без кап: остатки пищи и сахар под капой разрушают эмаль, а сами капы деформируются и окрашиваются."),
-            Tip(title: "Планируйте приёмы пищи",
-                text: "Три основных приёма пищи по 20–30 минут укладываются в лимит 2 часа. Частые перекусы быстро «съедают» время."),
-            Tip(title: "Горячее — только без кап",
-                text: "Горячий чай и кофе могут деформировать пластик. Пейте их без элайнеров или дайте остыть."),
-            Tip(title: "Осторожно с красящими продуктами",
-                text: "Кофе, чай, красное вино, ягоды, свёкла, куркума и соусы окрашивают капы и зубы. После них почистите зубы."),
-            Tip(title: "Мягкая еда в первые дни",
-                text: "После смены капы зубы чувствительны — выбирайте каши, супы, йогурты, пюре, омлет, рыбу."),
-            Tip(title: "Липкое и твёрдое",
-                text: "Ириски, жвачка, орехи, сухари и лёд могут повредить аттачменты и вызвать сколы."),
-            Tip(title: "Сладкие и кислые напитки",
-                text: "Газировка, соки и спортивные напитки под капой создают кислую среду. Пейте их без элайнеров и прополощите рот."),
+            Tip(title: "Take aligners out to eat",
+                text: "Eat and drink anything other than plain water only without aligners: food and sugar trapped under the tray damage enamel, and the trays warp and stain."),
+            Tip(title: "Plan your meals",
+                text: "Three main meals of 20–30 minutes each fit within the 2-hour limit. Frequent snacking eats up the time quickly."),
+            Tip(title: "Hot drinks without aligners",
+                text: "Hot tea and coffee can warp the plastic. Drink them with aligners out or let them cool down."),
+            Tip(title: "Watch out for staining foods",
+                text: "Coffee, tea, red wine, berries, beets, turmeric and sauces stain both trays and teeth. Brush after having them."),
+            Tip(title: "Soft food for the first days",
+                text: "Teeth are sensitive after switching trays — choose porridge, soups, yogurt, mashed potatoes, eggs and fish."),
+            Tip(title: "Sticky and hard foods",
+                text: "Toffee, gum, nuts, crackers and ice can damage attachments and chip teeth."),
+            Tip(title: "Sugary and acidic drinks",
+                text: "Soda, juice and sports drinks create an acidic environment under the tray. Drink them without aligners and rinse your mouth."),
         ]
         case .hygiene: [
-            Tip(title: "Чистите зубы перед надеванием",
-                text: "После каждого приёма пищи чистите зубы или хотя бы тщательно прополощите рот водой."),
-            Tip(title: "Зубная нить каждый день",
-                text: "Остатки пищи между зубами под капой — главная причина кариеса во время лечения."),
-            Tip(title: "Дорожный набор",
-                text: "Носите с собой футляр, компактную щётку, пасту и нить, чтобы привести себя в порядок где угодно."),
+            Tip(title: "Brush before putting aligners in",
+                text: "Brush your teeth after every meal, or at least rinse your mouth thoroughly with water."),
+            Tip(title: "Floss every day",
+                text: "Food stuck between teeth under the tray is the main cause of cavities during treatment."),
+            Tip(title: "Carry a travel kit",
+                text: "Keep a case, compact toothbrush, toothpaste and floss with you so you can freshen up anywhere."),
         ]
         case .care: [
-            Tip(title: "Чистите капы утром и вечером",
-                text: "Мягкой щёткой и прохладной водой. Абразивная паста оставляет царапины — капы мутнеют."),
-            Tip(title: "Никакой горячей воды",
-                text: "Не мойте и не замачивайте элайнеры в горячей воде — пластик деформируется."),
-            Tip(title: "Всегда в футляр",
-                text: "Не заворачивайте капы в салфетку — так их чаще всего выбрасывают по ошибке. Храните подальше от домашних животных."),
-            Tip(title: "Сохраняйте предыдущую капу",
-                text: "Если новая капа потеряется или сломается, предыдущая поможет удержать результат до визита к врачу."),
+            Tip(title: "Clean trays morning and evening",
+                text: "Use a soft brush and cool water. Abrasive toothpaste leaves scratches and makes trays cloudy."),
+            Tip(title: "No hot water",
+                text: "Never rinse or soak aligners in hot water — the plastic will warp."),
+            Tip(title: "Always use the case",
+                text: "Don't wrap trays in a napkin — that's how they most often get thrown away by mistake. Keep them away from pets."),
+            Tip(title: "Keep your previous tray",
+                text: "If a new tray gets lost or breaks, the previous one helps hold your progress until you see your orthodontist."),
         ]
         case .comfort: [
-            Tip(title: "Меняйте капу вечером",
-                text: "Самые неприятные первые часы после смены пройдут во сне."),
-            Tip(title: "Жевательные валики",
-                text: "Чуйзы помогают плотно посадить капу и ускоряют адаптацию: 5–10 минут несколько раз в день."),
-            Tip(title: "Натирает слизистую",
-                text: "Наложите ортодонтический воск на острый край и сообщите ортодонту."),
-            Tip(title: "Давление — это нормально",
-                text: "Ощущение давления 1–3 дня после смены — признак того, что капа работает. Сильная боль — повод позвонить врачу."),
+            Tip(title: "Switch trays in the evening",
+                text: "The most uncomfortable first hours after switching will pass while you sleep."),
+            Tip(title: "Use chewies",
+                text: "Aligner chewies help seat the tray properly and speed up adjustment: 5–10 minutes a few times a day."),
+            Tip(title: "Sore gums or cheeks",
+                text: "Put orthodontic wax on the sharp edge and let your orthodontist know."),
+            Tip(title: "Pressure is normal",
+                text: "Feeling pressure for 1–3 days after switching means the tray is working. Severe pain is a reason to call your doctor."),
         ]
         }
     }
@@ -111,12 +111,12 @@ struct TipsView: View {
                 }
 
                 Section {
-                    Text("Советы носят общий характер. Всегда следуйте рекомендациям своего ортодонта.")
+                    Text("These tips are general. Always follow your orthodontist's advice.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
-            .navigationTitle("Советы")
+            .navigationTitle("Tips")
         }
     }
 }

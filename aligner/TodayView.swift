@@ -13,7 +13,7 @@ struct TodayView: View {
             TimelineView(.periodic(from: .now, by: 1)) { timeline in
                 content(now: timeline.date)
             }
-            .navigationTitle("Сегодня")
+            .navigationTitle("Today")
         }
         .task {
             let now = Date.now
@@ -37,7 +37,7 @@ struct TodayView: View {
                     LimitRing(used: used, isOff: activeSession != nil)
 
                     if let activeSession {
-                        Text("Сняты в \(activeSession.start, format: .dateTime.hour().minute()) · \(now.timeIntervalSince(activeSession.start).clockString)")
+                        Text("Out since \(activeSession.start, format: .dateTime.hour().minute()) · \(now.timeIntervalSince(activeSession.start).clockString)")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                             .monospacedDigit()
@@ -49,9 +49,9 @@ struct TodayView: View {
                 .padding(.vertical)
             }
 
-            Section("Снятия сегодня") {
+            Section("Removed Today") {
                 if todaySessions.isEmpty {
-                    Text("Сегодня элайнеры ещё не снимались")
+                    Text("Aligners haven't been removed today")
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(todaySessions) { session in
@@ -69,7 +69,7 @@ struct TodayView: View {
                 }
             }
 
-            Section("Последние 7 дней") {
+            Section("Last 7 Days") {
                 ForEach(0..<7, id: \.self) { offset in
                     let day = Calendar.current.date(byAdding: .day, value: -offset, to: now) ?? now
                     let total = sessions.totalOffTime(on: day, now: now)
@@ -83,7 +83,7 @@ struct TodayView: View {
                 }
             }
 
-            Section("Совет дня") {
+            Section("Tip of the Day") {
                 TipRow(tip: Tip.ofTheDay(now))
             }
         }
@@ -94,8 +94,7 @@ struct TodayView: View {
         return Button {
             isOff ? putOn() : takeOff(used: used)
         } label: {
-            Label(isOff ? "Надеть элайнеры" : "Снять элайнеры",
-                  systemImage: isOff ? "checkmark.circle.fill" : "mouth")
+            Text(isOff ? "Put Aligners In" : "Take Aligners Out")
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.borderedProminent)
@@ -146,7 +145,7 @@ struct LimitRing: View {
                 .rotationEffect(.degrees(-90))
 
             VStack(spacing: 4) {
-                Text(isOff ? "Элайнеры сняты" : "Элайнеры надеты")
+                Text(isOff ? "Aligners out" : "Aligners in")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Text(isOverLimit
@@ -155,7 +154,7 @@ struct LimitRing: View {
                     .font(.system(.largeTitle, design: .rounded, weight: .bold))
                     .monospacedDigit()
                     .foregroundStyle(isOverLimit ? .red : .primary)
-                Text(isOverLimit ? "сверх лимита" : "осталось из 2 ч")
+                Text(isOverLimit ? "over the limit" : "left of 2 h")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -176,7 +175,7 @@ private struct SessionRow: View {
             if let end = session.end {
                 Text("\(session.start, format: .dateTime.hour().minute()) – \(end, format: .dateTime.hour().minute())")
             } else {
-                Text("\(session.start, format: .dateTime.hour().minute()) – сейчас")
+                Text("\(session.start, format: .dateTime.hour().minute()) – now")
             }
             Spacer()
             Text(((session.end ?? now).timeIntervalSince(session.start)).clockString)

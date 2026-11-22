@@ -22,15 +22,15 @@ enum ReminderScheduler {
         if remaining > warningLead {
             await add(
                 id: offWarningID,
-                title: "Осталось 15 минут",
-                body: "Скоро закончится дневной лимит без элайнеров.",
+                title: "15 minutes left",
+                body: "Your daily time without aligners is almost up.",
                 trigger: UNTimeIntervalNotificationTrigger(timeInterval: remaining - warningLead, repeats: false)
             )
         }
         await add(
             id: offLimitID,
-            title: "Наденьте элайнеры",
-            body: "Лимит 2 часа без элайнеров на сегодня исчерпан.",
+            title: "Put your aligners back in",
+            body: "You've used up today's 2 hours without aligners.",
             trigger: UNTimeIntervalNotificationTrigger(timeInterval: max(remaining, 1), repeats: false)
         )
     }
@@ -59,8 +59,8 @@ enum ReminderScheduler {
             let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
             await add(
                 id: "\(trayPrefix)\(tray)",
-                title: "Время сменить элайнеры",
-                body: "Сегодня надевайте капу №\(tray) из \(plan.totalTrays).",
+                title: "Time to switch aligners",
+                body: "Put in tray \(tray) of \(plan.totalTrays) today.",
                 trigger: UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
             )
         }

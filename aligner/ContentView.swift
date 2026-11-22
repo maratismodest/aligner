@@ -6,13 +6,13 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            Tab("Сегодня", systemImage: "timer") {
+            Tab("Today", systemImage: "timer") {
                 TodayView()
             }
-            Tab("Расписание", systemImage: "calendar") {
+            Tab("Schedule", systemImage: "calendar") {
                 ScheduleView()
             }
-            Tab("Советы", systemImage: "lightbulb") {
+            Tab("Tips", systemImage: "lightbulb") {
                 TipsView()
             }
         }
