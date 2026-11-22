@@ -16,7 +16,7 @@ struct AlignerLiveActivity: Widget {
             let isOverLimit = context.isStale
             return DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Label("Out", systemImage: "mouth.fill")
+                    Text("Out")
                         .foregroundStyle(.orange)
                         .font(.headline)
                 }
@@ -33,14 +33,12 @@ struct AlignerLiveActivity: Widget {
                     }
                 }
             } compactLeading: {
-                Image(systemName: "mouth.fill")
-                    .foregroundStyle(isOverLimit ? .red : .orange)
+                LimitRing(state: state, isOverLimit: isOverLimit)
             } compactTrailing: {
                 RemainingText(state: state, isOverLimit: isOverLimit)
                     .frame(maxWidth: 52)
             } minimal: {
-                Image(systemName: "mouth.fill")
-                    .foregroundStyle(isOverLimit ? .red : .orange)
+                LimitRing(state: state, isOverLimit: isOverLimit)
             }
             .keylineTint(.orange)
         }
@@ -55,7 +53,7 @@ private struct LockScreenView: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Label("Aligners out", systemImage: "mouth.fill")
+                    Text("Aligners out")
                         .font(.headline)
                         .foregroundStyle(isOverLimit ? .red : .orange)
                     Text("since \(state.offSince, format: .dateTime.hour().minute()) · \(Text(state.offSince, style: .timer))")
@@ -113,6 +111,29 @@ private struct LimitProgress: View {
             }
             .tint(.orange)
         }
+    }
+}
+
+/// Small circular progress for the compact and minimal Dynamic Island.
+private struct LimitRing: View {
+    let state: AlignerActivityAttributes.ContentState
+    let isOverLimit: Bool
+
+    var body: some View {
+        Group {
+            if isOverLimit {
+                ProgressView(value: 1)
+                    .tint(.red)
+            } else {
+                ProgressView(timerInterval: state.offSince...state.limitReachedAt, countsDown: false) {
+                    EmptyView()
+                } currentValueLabel: {
+                    EmptyView()
+                }
+                .tint(.orange)
+            }
+        }
+        .progressViewStyle(.circular)
     }
 }
 

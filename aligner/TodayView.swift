@@ -36,13 +36,6 @@ struct TodayView: View {
                 VStack(spacing: 20) {
                     LimitRing(used: used, isOff: activeSession != nil)
 
-                    if let activeSession {
-                        Text("Out since \(activeSession.start, format: .dateTime.hour().minute()) · \(now.timeIntervalSince(activeSession.start).clockString)")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                            .monospacedDigit()
-                    }
-
                     toggleButton(used: used)
                 }
                 .frame(maxWidth: .infinity)
