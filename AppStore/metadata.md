@@ -1,12 +1,12 @@
 # SmileTrack — App Store Connect metadata
 
-Copy each field into App Store Connect → SmileTrack → iOS App → 1.0.0.
+Copy each field into App Store Connect → SmileTrack Free App → iOS App → 1.0.0.
 
 ## App Information
 
 | Field | Value |
 |---|---|
-| Name (≤30) | SmileTrack |
+| Name (≤30) | SmileTrack Free App |
 | Subtitle (≤30) | Aligner Timer & Tray Tracker |
 | Bundle ID | com.maratismodest.smiletrack |
 | SKU | smiletrack |
