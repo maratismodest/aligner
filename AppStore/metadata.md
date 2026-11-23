@@ -12,7 +12,7 @@ Copy each field into App Store Connect → SmileTrack Free App → iOS App → 1
 | SKU | smiletrack |
 | Primary language | English (U.S.) |
 | Primary category | Health & Fitness |
-| Secondary category | Medical |
+| Secondary category | Utilities |
 | Content rights | Does not contain third-party content |
 | Age rating | 4+ (answer "None" / "No" to every question) |
 | Price | Free |
